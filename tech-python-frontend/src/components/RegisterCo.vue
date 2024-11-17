@@ -15,7 +15,10 @@
         type="email"
         placeholder="Correo electrónico"
       />
-      <textarea v-model="formData.about" placeholder="Acerca de mí"></textarea>
+      <textarea
+        v-model="formData.interests"
+        placeholder="Mis Intereses"
+      ></textarea>
 
       <div class="terms">
         <input v-model="formData.acceptedTerms" type="checkbox" id="terms" />
@@ -29,12 +32,19 @@
     </form>
     <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
   </div>
+  <div>
+    <Footer />
+  </div>
 </template>
 
 <script>
 import api from "@/services/api"; // Importa la instancia de Axios
+import Footer from "@/components/FooterCo.vue";
 
 export default {
+  components: {
+    Footer,
+  },
   data() {
     return {
       formData: {
@@ -62,7 +72,7 @@ export default {
           email: this.formData.email,
           phone: this.formData.phone,
           location: this.formData.location,
-          about: this.formData.about,
+          interests: this.formData.interests,
           // Asegúrate de usar los nombres de campo que espera tu backend
         });
         console.log("Registro exitoso:", response.data);
@@ -121,7 +131,7 @@ export default {
 }
 
 .terms input[type="checkbox"] {
-  margin-right: 8px;
+  margin-right: 6px;
   transform: scale(
     1.2
   ); /* Aumenta el tamaño del checkbox para mejor visibilidad */
